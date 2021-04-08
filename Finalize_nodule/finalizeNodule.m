@@ -237,8 +237,9 @@ model = tncore_remove(model);
 optimizeCbModel(model)
 
 % Rename two metabolites
- %model.mets{874} = 'Nodule_MNXM3224b[c]';
- %model.mets{1023} = 'Nodule_MNXM722712b[c]';
+model.mets{47} = 'Bacteroid_MNXM89621b[c]';
+model.mets{871} = 'Nodule_MNXM3224b[c]';
+ model.mets{1011} = 'Nodule_MNXM722712b[c]';
 
 % Renaming reactions
 % model.rxns{1889}='Root_MNXR109676_c';
