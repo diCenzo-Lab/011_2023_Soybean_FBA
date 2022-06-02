@@ -30,7 +30,8 @@ genesRNAseq = sortrows(genesRNAseq,2);
 % Identify genes off in GIMME and delete from the reduced model
 isPresent = logical(geneStates);
 genesToDelete = genesOut(~isPresent);
-[testModel, ~, ~] = deleteModelGenes(nodulatedPlant, genesToDelete);
+[testModel, ~, constrRxns] = deleteModelGenes(nodulatedPlant, genesToDelete);
+testModel = tncore_remove_reactions(testModel, constrRxns);
 
 % Test if the resulting model grows
 testSol = optimizeCbModel(testModel)
@@ -93,6 +94,8 @@ exctRxnsIId = nodulatedPlant.rxns(strmatch('EXCT_rev', nodulatedPlant.rxns));
 allRxns = unique(vertcat(allRxns, exctRxnsI));
 allRxns = unique(vertcat(allRxns, exctRxnsIId));
 
+% Ensure ATP maintenance cost reactions are not lost (likely not necessary)
+allRxns = unique(vertcat(allRxns, {'Leave_R_RXN-14455_c';'Root_R_RXN0-5205_c';'Nodule_R_RXN0-5205_c';'Bacteroid_ATPMR'}));
 
 % Ensure all proton exporters remain in the nodule
 % protonExport = {'NoduleI_TCE_PROTON'; 'NoduleIId_TCE_PROTON'; 'NoduleIIp_TCE_PROTON';...
@@ -105,6 +108,18 @@ nodulatedPlant_reduced = tncore_remove(nodulatedPlant_reduced);
 model = nodulatedPlant_reduced;
 
 %% Remove unnecessary genes based on expression
+
+% Identify off genes to delete, and delete them
+isPresent = logical(geneStates);
+genesToDelete = genesOut(~isPresent);
+genesToDelete = intersect(model.genes, genesToDelete);
+genesToProtect = findGenesFromRxns(model, setdiff(model.rxns, testModel.rxns));
+genesToProtect = unique(vertcat(genesToProtect{:}));
+if ~isempty(genesToProtect)
+genesToDelete = setdiff(genesToDelete, genesToProtect);
+end
+[model, ~, ~] = deleteModelGenes(model, genesToDelete);
+model = tncore_delete(model);
 
 % Force 'on' genes to be kept
 offGenes = genesOut(~logical(geneStates));
@@ -125,7 +140,13 @@ for n = 1:length(model.rxns)
 end
 
 % Identify unnecessary 'off' to remove
-for n = 1:length(model.rxns)
+if ~isempty(genesToProtect)
+[~, rxnsToModify] = findRxnsFromGenes(model, genesToProtect, [], 1);
+
+rxnsToModify = unique(rxnsToModify(:,1));
+
+for z = 1:length(rxnsToModify)
+    n = findRxnIDs(model, rxnsToModify{z});
     genesToKeep = {};
     genesToKeepTemp = {};
     genesToRemove = {};
@@ -298,6 +319,7 @@ for n = 1:length(model.rxns)
         end
     end
 end
+end
 model.rxnGeneMat = num2cell(model.rxnGeneMat);
 temp = cellfun('isempty',model.rxnGeneMat);
 model.rxnGeneMat(temp) = {0};
@@ -308,8 +330,20 @@ model.rxnGeneMat = sparse(double(model.rxnGeneMat));
 
 % Prepare the reduced model
 model = tncore_remove(model);
+if ~isempty(genesToProtect)
 [model, ~, constrRxns] = deleteModelGenes(model, {'toDelete'});
 model = tncore_delete(model);
+end
+% Find metabolites not associated with a reaction
+metsToRemove = {};
+for n = 1:length(model.mets)
+    if length(findRxnsFromMets(model, model.mets{n})) == 0
+        metsToRemove = vertcat(metsToRemove, model.mets{n});
+    end
+end
+if ~isempty(metsToRemove)
+    model = removeMetabolites(model, metsToRemove);
+end
 
 % Remove reactions producing deadend metabolites except in shoot and root
 tempModel = tncore_deadends(model, false);
