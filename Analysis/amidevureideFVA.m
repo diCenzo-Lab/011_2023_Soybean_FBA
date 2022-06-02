@@ -1,7 +1,7 @@
-function HighRGR_amidevureideFVA
+function amidevureideFVA
 clear
 close all
-model=readCbModel('NEWcombinedModel.mat')
+model=readCbModel('combinedModel.mat')
 changeCobraSolver ('glpk')
 %changeCobraSolver ('ibm_cplex');
 
