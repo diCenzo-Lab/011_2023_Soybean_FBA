@@ -4,8 +4,8 @@ close ALL
 
 %ctrl = readtable('controlsept21.csv');
 %high=readtable('decreasesept21.csv');
-ctrl = readtable('controlDec21.csv');
-high=readtable('decreaseDec.csv');
+ctrl = readtable('ctrl.csv');
+high=readtable('27.09pct_decrease.csv');
 seedc=ctrl(:,33);
 DVIctrl=ctrl(2077,33);
 seedh=high(:,33);
@@ -52,5 +52,5 @@ figure(3)
              set(gcf, 'PaperUnits', 'inches'); 
  x_width=16 ;y_width=15;
  set(gcf, 'PaperPosition', [0 0 x_width y_width]);
-%print('biocrosimDec21','-depsc','-loose');
+print('biocrosimHIGHRGR','-depsc','-loose');
 end
