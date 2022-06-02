@@ -1,14 +1,12 @@
-function NvsMass
+ function NvsMass
 clear 
 close ALL
 changeCobraSolver ('ibm_cplex');
-%model=readCbModel('withsinorxns22.mat');
-%model=readCbModel('WorkingSoy.mat');
-%model=readCbModel('finalNodulatedPlant.mat');
-%model=readCbModel('finalNodulatedPlantUSEFORPAPER.mat');
-%model=readCbModel('finalNodulatedPlantAPR21.mat');
-%model=readCbModel('FinalFINALmodel.mat');
-model=readCbModel('OGnewestmodelSEPT21.mat');
+
+%model=readCbModel('OGnewestmodelSEPT21.mat');
+%model=readCbModel('highRGRmodel.mat')
+%model=readCbModel('FinishedHighRGRApril22.mat');
+model=readCbModel('GeorgeUreideMay22.mat')
  [RIPE]=optimizeCbModel(model);
 massNON=(RIPE.f).*24/1000
 
@@ -29,7 +27,7 @@ soil = changeRxnBounds(soil,'Root_NH4_tx', 1000000, 'u');
 [RIPEY]=optimizeCbModel(soil);
 massN=(RIPEY.f).*24/1000
 m1=[];N=[];NN=[];m11=[];
-for n=0:500:6000;
+for n=0:500:10000;
 %for n=0:50:3600;
 
 model = changeRxnBounds(model,'Root_NH4_tx', n, 'u');
@@ -41,15 +39,24 @@ soil = changeRxnBounds(soil,'Root_NH4_tx', n, 'u');
 if RIPE.f==0 
   i=i+1
     n=n+1;
-  N=[N,n];
+  N=[N,n];  NN=[N,n];
+
 model = changeRxnBounds(model,'Root_NH4_tx', n, 'u');
 [RIPE]=optimizeCbModel(model);
 m=(RIPE.f).*24/1000;
 m1=[m1,m];
+soil = changeRxnBounds(soil,'Root_NH4_tx', n, 'u');
+[ripe1]=optimizeCbModel(soil);
+mm=(ripe1.f).*24/1000;
+m11=[m11,mm];
 elseif  ripe1.f==0
     i=i+1
     n=n+1;
-  NN=[NN,n];
+  NN=[NN,n];  N=[N,n];
+model = changeRxnBounds(model,'Root_NH4_tx', n, 'u');
+[RIPE]=optimizeCbModel(model);
+m=(RIPE.f).*24/1000;
+m1=[m1,m];
 soil = changeRxnBounds(soil,'Root_NH4_tx', n, 'u');
 [ripe1]=optimizeCbModel(soil);
 mm=(ripe1.f).*24/1000;
@@ -67,38 +74,47 @@ end
 end
 m1(end)
 noo=0:10:210;
-figure(1)
+figure(1)            
+            plot(N/1000,(massN)*ones(size(N)),'--','color','k','LineWidth',4)
+             hold on, drawnow 
+            plot(N/1000,(massNON)*ones(size(N)),'-.','color','k','LineWidth',4)
+             hold on, drawnow
             plot(N/1000,m1,'color','b','LineWidth',4);
-            hold on, drawnow 
-             %           plot(NN,m11,'color','b','LineWidth',4);
-           % hold on, drawnow
-            plot(N/1000,massN*ones(size(N)),'--','color','k','LineWidth',4)
-                        hold on, drawnow 
-            plot(N/1000,massNON*ones(size(N)),'--','color','k','LineWidth',4)
-            xlabel('Soil ammonium uptake (\mumol/hr/gDW) ','FontSize',40)
-            ylabel('Biomass (g/g/d)','FontSize',40)
-              set(gca,'LineWidth',2,'FontSize',40)
-            axis([0.5 6 0.02 0.045])
-             set(gcf, 'PaperUnits', 'inches'); 
- x_width=19 ;y_width=15;
- set(gcf, 'PaperPosition', [0 0 x_width y_width]);
-print('NewNvmassDec21','-depsc','-loose');
+          %  hold on, drawnow 
 
-figure(2)
-            plot(f(noo),noo,'color','b','LineWidth',4);
-            hold on, drawnow 
-            plot(N,massN*ones(size(N)),'--','color','k','LineWidth',4)
-                        hold on, drawnow 
-            plot(N,massNON*ones(size(N)),'--','color','k','LineWidth',4)
-            xlabel('Soil ammonium uptake (\mumol/hr/gDW) ','FontSize',50)
-            ylabel('Soil N (\mu M)','FontSize',50)
-              set(gca,'LineWidth',2,'FontSize',50)
-            %axis([0 6000 0.025 0.057])
+                        plot(N/1000,m11,'color','g','LineWidth',4);
+            hold on, drawnow
+         plot(N/1000,(((m1+abs(m1-massN)*0.55))),'color','r','LineWidth',4);
+            hold on, drawnow
+               %         legend('100% N','0 % N' ,'Soybean N fixing','Location','Best');
+
+            legend('100% N','0 % N' ,'Soybean N fixing','Soybean not N fixing','Location','Best');
+            xlabel('Soil ammonium uptake \mu mol/g/hr ','FontSize',40)
+            ylabel(' Relative growth rate g/g/d','FontSize',40)
+              set(gca,'LineWidth',2,'FontSize',40)
+            %axis([0 100 0 120])
+          % axis([0 10 0 0.08])
              set(gcf, 'PaperUnits', 'inches'); 
- x_width=15 ;y_width=6.8;
+ x_width=24 ;y_width=15;
  set(gcf, 'PaperPosition', [0 0 x_width y_width]);
-%print('SoilNMASSapril','-depsc','-loose');
-    function ff=f(x)
-        ff=(103.*x)./(216-x);
-    end
+ print('NvsMassHIGHRGRposter','-depsc','-loose');
+%print('NewNvmassDec21','-depsc','-loose');
+% 
+% figure(2)
+%             plot(f(noo),noo,'color','b','LineWidth',4);
+%             hold on, drawnow 
+%             plot(N,massN*ones(size(N)),'--','color','k','LineWidth',4)
+%                         hold on, drawnow 
+%             plot(N,massNON*ones(size(N)),'--','color','k','LineWidth',4)
+%             xlabel('Soil ammonium uptake (\mumol/hr/gDW) ','FontSize',50)
+%             ylabel('Soil N (\mu M)','FontSize',50)
+%               set(gca,'LineWidth',2,'FontSize',50)
+%             %axis([0 6000 0.025 0.057])
+%              set(gcf, 'PaperUnits', 'inches'); 
+%  x_width=15 ;y_width=6.8;
+%  set(gcf, 'PaperPosition', [0 0 x_width y_width]);
+% %print('SoilNMASSapril','-depsc','-loose');
+%     function ff=f(x)
+%         ff=(103.*x)./(216-x);
+%     end
 end
