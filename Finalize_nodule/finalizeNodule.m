@@ -12,7 +12,7 @@ metanetxChem = table2cell(readtable('chem_xref.txt', 'Delimiter', '\t','ReadVari
 
 %% Change reaction names
 
-% Extract just the SEED reaction names
+% Extract just the BIGG reaction names
 seedRxns = {};
 x = 0;
 for n = 1:length(metanetxRxns)
@@ -118,7 +118,7 @@ end
 
 %% Change metabolite names
 
-% Extract just the SEED compound names
+% Extract just the BIGG compound names
 seedMets = {};
 x = 0;
 for n = 1:length(metanetxChem)
@@ -236,16 +236,34 @@ model = tncore_remove_reactions(model, F);
 model = tncore_remove(model);
 optimizeCbModel(model)
 
-% Rename two metabolites
-model.mets{47} = 'Bacteroid_MNXM89621b[c]';
-model.mets{871} = 'Nodule_MNXM3224b[c]';
- model.mets{1011} = 'Nodule_MNXM722712b[c]';
+% % Rename two metabolites
+ %model.mets{118} = 'Bacteroid_MNXM89621b[c]';
+ model.mets{975} = 'Nodule_MNXM3224b[c]';
+ model.mets{1179} = 'Nodule_MNXM722712b[c]';
 
 % Renaming reactions
 % model.rxns{1889}='Root_MNXR109676_c';
 % model.rxns{1890}='Leave_MNXR109676_c';
 % model.rxns{1898}='Leave_MNXR152255_c';
 % model.rxns{1899}='Leave_MNXR144933_c';
+
+%% Ensure maintenance costs are correct (may not be required)
+
+% Get maintenance cost reactions
+ATPMaintenanceShoot = find(ismember(model.rxns, {'Leave_MNXR96949_c'; 'Leave_ADENOSINETRIPHOSPHATASE-RXN_c'}));
+ATPMaintenanceRoot = find(ismember(model.rxns, {'Root_MNXR105277_c'; 'Root_ADENOSINETRIPHOSPHATASE-RXN_c'}));
+ATPMaintenanceNodule = find(ismember(model.rxns, {'Nodule_MNXR105277_c'; 'Nodule_H+_ATPase_c'; 'Nodule_ADENOSINETRIPHOSPHATASE-RXN_c'}));
+ATPMaintenanceBacteroid = find(ismember(model.rxns, {'Bacteroid_ATPMR'; 'Bacteroid_MNXR153054'}));
+
+% Update maintenance costs
+MaintenanceRequirement = 0.6250 / 180 * 32 * 1000 * 1000;
+MaintenanceRequirementNodule = MaintenanceRequirement * 0.02;
+MaintenanceRequirementBacteroid = 8400 * 0.02 * 0.3 * 1000;
+model.lb(ATPMaintenanceShoot) = MaintenanceRequirement * 0.83;
+model.lb(ATPMaintenanceRoot) = MaintenanceRequirement * 0.17;
+model.lb(ATPMaintenanceNodule) = MaintenanceRequirementNodule * 0.75 * 0.5;
+model.lb(ATPMaintenanceBacteroid) = MaintenanceRequirementBacteroid * 0.25 * 0.5;
+optimizeCbModel(model)
 
 %% Finish
 finalNodulatedPlant = model;
