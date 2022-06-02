@@ -1,27 +1,24 @@
-function NvsNfixcclear
+function NvsNfix
 close ALL
 changeCobraSolver ('ibm_cplex');
 
-%model=readCbModel('OGnewestmodelSEPT21.mat');
-%model=readCbModel('highRGRmodel.mat')
-%model=readCbModel('FinishedHighRGRApril22.mat');
-model=readCbModel('GeorgeUreideMay22.mat')
+model=readCbModel('Ureide.mat')
 
 [RIPE]=optimizeCbModel(model);
 massNON=(RIPE.f).*24/100;
 
 soil=model;
-%soil = changeRxnBounds(soil,'Nodule_NH4_tx', 1000000, 'u');
+
 soil = changeRxnBounds(soil,'Root_NH4_tx', 1000000, 'u');
 [RIPEY]=optimizeCbModel(soil);
 massN=(RIPEY.f).*24/100;
 m1=[];N=[];
 for n=0:500:10000;
     
-%model = changeRxnBounds(model,'Nodule_NH4_tx', n, 'u');
+
 model = changeRxnBounds(model,'Root_NH4_tx', n, 'u');
 [RIPE]=optimizeCbModel(model);
-%m=(RIPE.f).*24/100;
+
 
 roger1=find(contains(model.rxns,'Bacteroid_NIT'));
 
@@ -42,10 +39,8 @@ m1=[m1,N1];
   N=[N,n];
 
 
-%end
 end
 m1(end)
-%N=0:1000:2000;
 
 figure(1)
             plot(N/1000,m1*2/1000,'color','b','LineWidth',4);
@@ -60,8 +55,8 @@ figure(1)
              set(gcf, 'PaperUnits', 'inches'); 
  x_width=16 ;y_width=15;
  set(gcf, 'PaperPosition', [0 0 x_width y_width]);
-print('SoilNNfixHIGHRGRnew','-depsc','-loose');
+print('SoilNNfix','-depsc','-loose');
 
-%print('NFIXCOMP','-depsc','-loose');
+
 
 end
