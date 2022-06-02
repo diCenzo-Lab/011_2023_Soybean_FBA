@@ -3,9 +3,7 @@ clear
 close ALL
 changeCobraSolver ('ibm_cplex');
 
-%model=readCbModel('OGnewestmodelSEPT21.mat');
-%model=readCbModel('highRGRmodel.mat')
-%model=readCbModel('FinishedHighRGRApril22.mat');
+
 model=readCbModel('GeorgeUreideMay22.mat')
  [RIPE]=optimizeCbModel(model);
 massNON=(RIPE.f).*24/1000
@@ -28,7 +26,6 @@ soil = changeRxnBounds(soil,'Root_NH4_tx', 1000000, 'u');
 massN=(RIPEY.f).*24/1000
 m1=[];N=[];NN=[];m11=[];
 for n=0:500:10000;
-%for n=0:50:3600;
 
 model = changeRxnBounds(model,'Root_NH4_tx', n, 'u');
 [RIPE]=optimizeCbModel(model);
@@ -98,23 +95,4 @@ figure(1)
  x_width=24 ;y_width=15;
  set(gcf, 'PaperPosition', [0 0 x_width y_width]);
  print('NvsMassHIGHRGRposter','-depsc','-loose');
-%print('NewNvmassDec21','-depsc','-loose');
-% 
-% figure(2)
-%             plot(f(noo),noo,'color','b','LineWidth',4);
-%             hold on, drawnow 
-%             plot(N,massN*ones(size(N)),'--','color','k','LineWidth',4)
-%                         hold on, drawnow 
-%             plot(N,massNON*ones(size(N)),'--','color','k','LineWidth',4)
-%             xlabel('Soil ammonium uptake (\mumol/hr/gDW) ','FontSize',50)
-%             ylabel('Soil N (\mu M)','FontSize',50)
-%               set(gca,'LineWidth',2,'FontSize',50)
-%             %axis([0 6000 0.025 0.057])
-%              set(gcf, 'PaperUnits', 'inches'); 
-%  x_width=15 ;y_width=6.8;
-%  set(gcf, 'PaperPosition', [0 0 x_width y_width]);
-% %print('SoilNMASSapril','-depsc','-loose');
-%     function ff=f(x)
-%         ff=(103.*x)./(216-x);
-%     end
 end
