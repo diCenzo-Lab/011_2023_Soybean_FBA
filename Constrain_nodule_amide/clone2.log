@@ -1,0 +1,125 @@
+
+Log for '' Clone_2 (V12.9.0.0) Sun May  1 17:06:51 2022
+
+
+Log for '' Clone_2 (V12.9.0.0) Sun May  1 17:06:53 2022
+
+
+Log for 'CPLEX' Clone_2 (V12.9.0.0) Sun May  1 17:06:55 2022
+
+
+Log for 'CPLEX' Clone_2 (V12.9.0.0) Sun May  1 17:12:41 2022
+
+
+Iteration log . . .
+Iteration:     1    Scaled infeas =     221369811.558481
+Iteration:   221    Scaled infeas =      40025656.099305
+Iteration:   364    Scaled infeas =      22623882.338507
+Iteration:   505    Scaled infeas =      17176040.046794
+Iteration:   629    Scaled infeas =      14216811.112650
+Iteration:   768    Scaled infeas =      11837519.382935
+Iteration:   920    Scaled infeas =       5912047.005356
+Iteration:  1075    Scaled infeas =       4080818.708922
+Iteration:  1206    Scaled infeas =       2632510.230207
+Iteration:  1333    Scaled infeas =       2028726.310465
+Iteration:  1468    Scaled infeas =       1773975.552142
+Switched to devex.
+Iteration:  1594    Scaled infeas =       1310430.188899
+Iteration:  1718    Scaled infeas =        577661.241163
+Iteration:  1835    Scaled infeas =        460689.728995
+Iteration:  1967    Scaled infeas =        322561.342646
+Iteration:  2113    Scaled infeas =        180377.017340
+Iteration:  2253    Scaled infeas =         63065.312696
+Iteration:  2384    Scaled infeas =         11514.505331
+Switched to steepest-edge.
+Iteration:  2508    Scaled infeas =          3533.135664
+Iteration:  2592    Scaled infeas =          3533.135657
+Markowitz threshold set to 0.1
+Iteration:  2594    Scaled infeas =          3533.135734
+Iteration:  2597    Scaled infeas =          3533.135732
+Iteration:  2687    Scaled infeas =           183.147392
+Iteration:  2766    Scaled infeas =            88.024296
+Iteration:  2769    Scaled infeas =            88.024297
+Iteration:  2866    Scaled infeas =             8.239651
+Iteration:  2887    Scaled infeas =             8.237713
+Iteration:  2993    Scaled infeas =             8.237334
+Iteration:  3092    Scaled infeas =             8.240307
+Iteration:  3138    Scaled infeas =             8.242055
+Iteration:  3228    Scaled infeas =             8.240269
+Iteration:  3317    Scaled infeas =             8.240258
+Iteration:  3401    Scaled infeas =             8.240044
+Iteration:  3494    Scaled infeas =             8.234611
+Iteration:  3595    Scaled infeas =             7.944686
+Iteration:  3686    Scaled infeas =             7.604400
+Iteration:  3773    Scaled infeas =             3.932035
+Iteration:  3880    Scaled infeas =             1.375965
+Iteration:  3989    Scaled infeas =             0.927958
+Iteration:  4090    Scaled infeas =             0.134436
+Removing shift (505).
+
+Dual simplex solved model.
+
+
+Log for 'CPLEX' Clone_2 (V12.9.0.0) Sun May  1 17:12:41 2022
+
+Symmetry aggregator did 1899 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Scaled infeas = 27538900949704.636719
+Iteration:    28    Scaled infeas = 12785415442912.958984
+Iteration:   245    Scaled infeas = 4144359791661.034180
+Iteration:   449    Scaled infeas = 3488756784590.415527
+Iteration:   628    Scaled infeas = 2871954583616.495605
+Iteration:   818    Scaled infeas = 2419348104695.226562
+Iteration:   974    Scaled infeas = 2363199664354.191895
+Iteration:  1127    Scaled infeas = 2037149449188.819336
+Iteration:  1309    Scaled infeas = 1638290724326.418701
+Iteration:  1510    Scaled infeas = 1596215592718.172852
+Iteration:  1684    Scaled infeas = 1157281020197.696045
+Iteration:  1868    Scaled infeas =  525575838233.633057
+Iteration:  2050    Scaled infeas =  509960256217.911133
+Iteration:  2220    Scaled infeas =  418736284545.899231
+Iteration:  2352    Scaled infeas =  377702648595.776611
+Iteration:  2540    Scaled infeas =  369842856615.502075
+Iteration:  2715    Scaled infeas =  337231781782.069092
+Switched to devex.
+Iteration:  2881    Scaled infeas =  251943900170.829651
+Iteration:  3081    Scaled infeas =   98798010791.962158
+Iteration:  3247    Scaled infeas =   65596944253.286392
+Iteration:  3436    Scaled infeas =   27285415336.296432
+Markowitz threshold set to 0.1
+Iteration:  3573    Scaled infeas =   12768530360.570808
+Iteration:  3766    Scaled infeas =    5541445713.861543
+Iteration:  3927    Scaled infeas =    4857645466.864028
+Iteration:  3932    Scaled infeas =    4857645466.864021
+Iteration:  3933    Scaled infeas =    4857645466.864925
+Iteration:  4077    Scaled infeas =    3728501608.878904
+Iteration:  4082    Scaled infeas =    3728501608.879063
+Iteration:  4118    Scaled infeas =    3575986442.345303
+Iteration:  4259    Scaled infeas =    2070842645.062523
+Iteration:  4433    Scaled infeas =     647119149.015556
+Iteration:  4575    Scaled infeas =     128866993.173116
+Iteration:  4588    Scaled infeas =      77003121.682582
+Switched to steepest-edge.
+Iteration:  4722    Scaled infeas =      14067850.934393
+Iteration:  4829    Scaled infeas =      14067388.583291
+Iteration:  4845    Scaled infeas =      14067380.327747
+Iteration:  4956    Scaled infeas =      14063760.451415
+Iteration:  5078    Scaled infeas =      14063760.450682
+Iteration:  5179    Scaled infeas =      14063760.450771
+Iteration:  5308    Scaled infeas =      14062323.959149
+Iteration:  5431    Scaled infeas =      14057445.680060
+Iteration:  5571    Scaled infeas =      13502531.911805
+Iteration:  5698    Scaled infeas =      13500076.821088
+Iteration:  5812    Scaled infeas =      12461640.910741
+Iteration:  5928    Scaled infeas =        539121.903770
+Iteration:  6027    Scaled infeas =        314639.288273
+Iteration:  6144    Scaled infeas =        274288.205774
+Iteration:  6252    Scaled infeas =        239689.924695
+Iteration:  6391    Scaled infeas =        227341.808673
+Iteration:  6506    Scaled infeas =        226206.403532
+Iteration:  6655    Scaled infeas =        125241.594650
+Removing shift (472).
+
+Dual simplex solved model.
+
