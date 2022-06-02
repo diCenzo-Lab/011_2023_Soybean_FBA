@@ -4,7 +4,7 @@ close ALL
 changeCobraSolver ('ibm_cplex');
 
 
-model=readCbModel('GeorgeUreideMay22.mat')
+model=readCbModel('Ureide.mat')
  [RIPE]=optimizeCbModel(model);
 massNON=(RIPE.f).*24/1000
 
@@ -77,22 +77,16 @@ figure(1)
             plot(N/1000,(massNON)*ones(size(N)),'-.','color','k','LineWidth',4)
              hold on, drawnow
             plot(N/1000,m1,'color','b','LineWidth',4);
-          %  hold on, drawnow 
-
-                        plot(N/1000,m11,'color','g','LineWidth',4);
+            plot(N/1000,m11,'color','g','LineWidth',4);
             hold on, drawnow
          plot(N/1000,(((m1+abs(m1-massN)*0.55))),'color','r','LineWidth',4);
             hold on, drawnow
-               %         legend('100% N','0 % N' ,'Soybean N fixing','Location','Best');
-
             legend('100% N','0 % N' ,'Soybean N fixing','Soybean not N fixing','Location','Best');
             xlabel('Soil ammonium uptake \mu mol/g/hr ','FontSize',40)
             ylabel(' Relative growth rate g/g/d','FontSize',40)
               set(gca,'LineWidth',2,'FontSize',40)
-            %axis([0 100 0 120])
-          % axis([0 10 0 0.08])
              set(gcf, 'PaperUnits', 'inches'); 
  x_width=24 ;y_width=15;
  set(gcf, 'PaperPosition', [0 0 x_width y_width]);
- print('NvsMassHIGHRGRposter','-depsc','-loose');
+ print('NvsMass','-depsc','-loose');
 end
