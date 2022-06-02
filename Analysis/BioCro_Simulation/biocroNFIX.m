@@ -1,9 +1,8 @@
-function biocroNFIXNEW
+function biocroNFIX
 clear 
 close ALL
 
-%ctrl = readtable('controlsept21.csv');
-%high=readtable('decreasesept21.csv');
+
 ctrl = readtable('ctrl.csv');
 high=readtable('27.09pct_decrease.csv');
 seedc=ctrl(:,33);
