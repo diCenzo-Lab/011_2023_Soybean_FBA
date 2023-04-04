@@ -6,7 +6,7 @@ changeCobraSolver ('glpk')
 %model=readCbModel('highRGRmodel.mat')
 %model=readCbModel('FinishedHighRGRApril22.mat');
 %model=readCbModel('GeorgeUreideMay22.mat')
-model=readCbModel('mass_charge_balanced_model.mat')
+model=readCbModel('model_with_databases_subs.mat')
 
 [RIPE]=optimizeCbModel(model);
 massNON=(RIPE.f).*24/100;
