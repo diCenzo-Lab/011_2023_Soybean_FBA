@@ -1,4 +1,4 @@
-model=readCbModel('model_with_databases.mat');
+model=readCbModel('Combined_model_with_databases.mat');
 rxns=model.rxns;
 rxns = erase(rxns,'Root_');
 rxns = erase(rxns,'Leave_');
@@ -65,7 +65,7 @@ model.metNames=strrep(model.metNames,'Leave_','Shoot_')
     model.grRules=strrep(model.grRules,'Leave_','Shoot_')
 
 
-save('model_with_databases_subs.mat','model')
+save('combined_model_with_databases_subs.mat','model')
 % 
 % pat = digitsPattern
 % maps = extract(newStr2,pat)
