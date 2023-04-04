@@ -1,7 +1,7 @@
 clear
 close all
 %model=readCbModel('NEWcombinedModel.mat')
-model=readCbModel('Combined_mass_charge_balanced_model.mat')
+model=readCbModel('combined_model_with_databases_subs.mat')
 
 changeCobraSolver ('glpk')
 %changeCobraSolver ('ibm_cplex');
