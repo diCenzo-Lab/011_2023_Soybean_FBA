@@ -1,6 +1,6 @@
 %% Load the model
 
-model=readCbModel('mass_charge_balanced_model.mat')
+model=readCbModel('Combined_mass_charge_balanced_model.mat')
 
 h0=find(contains(model.metFormulas,'H0'))
 for n=1:length(h0)
@@ -221,4 +221,4 @@ clearvars -except model
 
 %% Save
 
-save('model_with_databases.mat');
+save('Combined_model_with_databases.mat');
