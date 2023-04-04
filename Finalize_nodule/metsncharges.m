@@ -3,7 +3,7 @@ changeCobraSolver ('ibm_cplex');
 
 soy=readCbModel('soybeangeorge.mat');
 brady=readCbModel('USDA110_model.mat');
-model=readCbModel('finalNodulatedPlant.mat')
+model=readCbModel('GeorgeUreideMay22.mat')
 % % Import METANETX compound database
 metanetxForm = table2cell(readtable('chem_prop.txt', 'Delimiter', '\t','ReadVariableNames', false));
 metanetxChem = table2cell(readtable('chem_xref.txt', 'Delimiter', '\t','ReadVariableNames', false));
@@ -113,7 +113,7 @@ metCharges(pos,1)=0;
 % 44 3a2opp
 % 45 C6H12O6
 pos=strmatch('MNXM175',uniquemets,'exact');
- metFormulas{pos,1}='C6H12O6';
+ metFormulas{pos,1}='C6H11O9P';
 metCharges(pos,1)=0;
 % 46
 pos=strmatch('glc_A',uniquemets,'exact');
@@ -141,14 +141,14 @@ pos=strmatch('MNXM568',uniquemets,'exact');
 metCharges(pos,1)=-1;
 % MNXM33
 pos=strmatch('MNXM33',uniquemets,'exact');
- metFormulas{pos,1}='C27H33N9O15P2';
+ metFormulas{pos,1}='C27H31N9O15P2';
 % MNXM565
 pos=strmatch('MNXM565',uniquemets,'exact');
  metFormulas{pos,1}='C8H15N3O8P';
 metCharges(pos,1)=0;
 % MNXM318
 pos=strmatch('MNXM318',uniquemets,'exact');
- metFormulas{pos,1}='C20H23N7O6';
+ metFormulas{pos,1}='C20H24N7O6';
 %Pumped-PROTON
 pos=strmatch('Pumped-PROTON',uniquemets,'exact');
  metFormulas{pos,1}='H';
@@ -219,7 +219,7 @@ pos=strmatch('MNXM164034',uniquemets,'exact');
 metCharges(pos,1)=-2;
 % MNXM15900
 pos=strmatch('MNXM15900',uniquemets,'exact');
- metFormulas{pos,1}='C5H11O8P';
+ metFormulas{pos,1}='C5H9O8P';
 % MNXM746 *unsure_on_charge*
 pos=strmatch('MNXM746',uniquemets,'exact');
  metFormulas{pos,1}='C34H32FeN4O4S2';
@@ -352,7 +352,7 @@ pos=strmatch('Photon',uniquemets,'exact');
 metCharges(pos,1)=0; 
 % MNXM89621
 pos=strmatch('MNXM89621',uniquemets,'exact');
- metFormulas{pos,1}='C6H11O9P';
+ metFormulas{pos,1}='C6H10O12P2';
 % % 3a2opp
 % pos=strmatch('3a2opp',uniquemets,'exact');
 %  metFormulas{pos,1}='C4H8NO7P';
@@ -392,290 +392,289 @@ metsleft=transpose(metsleft)
 
 constrainedNodule.metFormulas=strrep(constrainedNodule.metFormulas,'*','');
 model=constrainedNodule;
-save('old_with_formulas','model')
 save('model_with_formulas','model')
 
-
-
-%%
-% adding the formula and charge by hand 
-%1
-pos=strmatch('Bacteroid_MNXM182[e]',constrainedNodule.mets,'exact');
-  constrainedNodule.metFormulas{pos,1}='C6H12O6';
-constrainedNodule.metCharges(pos,1)=0;
-%2
-pos=strmatch('Bacteroid_MNXM231[e]',constrainedNodule.mets,'exact');
-  constrainedNodule.metFormulas{pos,1}='C6H13NO2';
-constrainedNodule.metCharges(pos,1)=0;
-%3
-pos=strmatch('Bacteroid_MNXM242[e]',constrainedNodule.mets,'exact');
-  constrainedNodule.metFormulas{pos,1}='C5H10O5';
-constrainedNodule.metCharges(pos,1)=0;
-%4
-pos=strmatch('Bacteroid_MNXM2[e]',constrainedNodule.mets,'exact');
-  constrainedNodule.metFormulas{pos,1}='H2O';
-constrainedNodule.metCharges(pos,1)=0;
-%5
-pos=strmatch('Bacteroid_MNXM323[e]',constrainedNodule.mets,'exact');
-  constrainedNodule.metFormulas{pos,1}='HO3S2';
-constrainedNodule.metCharges(pos,1)=-1;
-%6 
-pos=strmatch('Bacteroid_MNXM370[e]',constrainedNodule.mets,'exact');
-  constrainedNodule.metFormulas{pos,1}='C6H14NO8P';
-constrainedNodule.metCharges(pos,1)=0;
-%7 mnxm390
-pos=strmatch('Bacteroid_MNXM390[e]',constrainedNodule.mets,'exact');
-  constrainedNodule.metFormulas{pos,1}='C6H12O6';
-constrainedNodule.metCharges(pos,1)=0;
-%8 mnxm42
-pos=strmatch('Bacteroid_MNXM42[e]',constrainedNodule.mets,'exact');
-  constrainedNodule.metFormulas{pos,1}='C4H7NO4';
-constrainedNodule.metCharges(pos,1)=0;
-%9 MNXM722779
-pos=strmatch('Bacteroid_MNXM722779[e]',constrainedNodule.mets,'exact');
-  constrainedNodule.metFormulas{pos,1}='C7H9O7';
-constrainedNodule.metCharges(pos,1)=0;
-%10 cpdFe4S4
-%11 hcit
-% pos=strmatch('Bacteroid_hcit[c]',constrainedNodule.mets,'exact');
-%   constrainedNodule.metFormulas{pos,1}='C7H7O7';
-% constrainedNodule.metCharges(pos,1)=-3;
-%12 mobd
-% pos=strmatch('Bacteroid_mobd[c]',constrainedNodule.mets,'exact');
-%   constrainedNodule.metFormulas{pos,1}='H2MoO4';
+% 
+% 
+% %%
+% % adding the formula and charge by hand 
+% %1
+% pos=strmatch('Bacteroid_MNXM182[e]',constrainedNodule.mets,'exact');
+%   constrainedNodule.metFormulas{pos,1}='C6H12O6';
 % constrainedNodule.metCharges(pos,1)=0;
-%13 symCoF
-%14 photon
-%15 MNXM182
-pos=strmatch('Nodule_MNXM182[c]',constrainedNodule.mets,'exact');
-  constrainedNodule.metFormulas{pos,1}='C6H12O6';
-constrainedNodule.metCharges(pos,1)=0;
-%16 _MNXM231
-pos=strmatch('Nodule_MNXM231[c]',constrainedNodule.mets,'exact');
-  constrainedNodule.metFormulas{pos,1}='C6H13NO2';
-constrainedNodule.metCharges(pos,1)=0;
-%17 MNXM242
-pos=strmatch('Nodule_MNXM242[c]',constrainedNodule.mets,'exact');
-  constrainedNodule.metFormulas{pos,1}='C5H10O5';
-constrainedNodule.metCharges(pos,1)=0;
-%18-21 MNXM2
-pos=strmatch('Nodule_MNXM2[c]',constrainedNodule.mets,'exact');
-  constrainedNodule.metFormulas{pos,1}='H2O';
-constrainedNodule.metCharges(pos,1)=0;
-pos=strmatch('Nodule_MNXM2[m]',constrainedNodule.mets,'exact');
-  constrainedNodule.metFormulas{pos,1}='H2O';
-constrainedNodule.metCharges(pos,1)=0;
-pos=strmatch('Nodule_MNXM2[p]',constrainedNodule.mets,'exact');
-  constrainedNodule.metFormulas{pos,1}='H2O';
-constrainedNodule.metCharges(pos,1)=0;
-pos=strmatch('Nodule_MNXM2[x]',constrainedNodule.mets,'exact');
-  constrainedNodule.metFormulas{pos,1}='H2O';
-constrainedNodule.metCharges(pos,1)=0;
-% 22 MNXM323
-pos=strmatch('Nodule_MNXM323[c]',constrainedNodule.mets,'exact');
-  constrainedNodule.metFormulas{pos,1}='HO3S2';
-constrainedNodule.metCharges(pos,1)=-1;
-%23 MNXM370
-pos=strmatch('Nodule_MNXM370[c]',constrainedNodule.mets,'exact');
-  constrainedNodule.metFormulas{pos,1}='C6H14NO8P';
-constrainedNodule.metCharges(pos,1)=0;
-%24 MNXM390
-pos=strmatch('Nodule_MNXM390[c]',constrainedNodule.mets,'exact');
-  constrainedNodule.metFormulas{pos,1}='C6H12O6';
-constrainedNodule.metCharges(n,1)=0;
-%25-27 MNXM42
-pos=strmatch('Nodule_MNXM42[c]',constrainedNodule.mets,'exact');
-  constrainedNodule.metFormulas{pos,1}='C4H7NO4';
-constrainedNodule.metCharges(pos,1)=0;
-pos=strmatch('Nodule_MNXM42[m]',constrainedNodule.mets,'exact');
-  constrainedNodule.metFormulas{pos,1}='C4H7NO4';
-constrainedNodule.metCharges(pos,1)=0;
-pos=strmatch('Nodule_MNXM42[p]',constrainedNodule.mets,'exact');
-  constrainedNodule.metFormulas{pos,1}='C4H7NO4';
-constrainedNodule.metCharges(pos,1)=0;
-%28 MNXM722779
-pos=strmatch('Nodule_MNXM722779[c]',constrainedNodule.mets,'exact');
-  constrainedNodule.metFormulas{pos,1}='C7H9O7';
-constrainedNodule.metCharges(pos,1)=0;
-%29 MNXM746
-%33 phb C12H20O6
-pos=strmatch('Bacteroid_phb[c]',constrainedNodule.mets,'exact');
-  constrainedNodule.metFormulas{pos,1}='C4H6O2';
-constrainedNodule.metCharges(pos,1)=0;
-% %% generating multiple database IDs
-% 
-% metanetx=model.mets(find(contains(model.mets,'MNXM')));
-% 
-% Other=setdiff(model.mets,metanetx);
-% load('mappedCompounds.mat')
-% model.metIDs={};leftovers=[];
-% for n=1:length(model.mets)
-%  n   
-% boo=contains(model.mets{n},'MNXM')
-%     if boo~=0
-% met = model.mets{n};
-% met = erase(met,'Leave_');
-% met = erase(met,'Root_');
-% met = erase(met,'Bacteroid_');
-% met = erase(met,'Nodule_');
-% met = erase(met,'[c]');
-% met = erase(met,'[p]');
-% met = erase(met,'[x]');
-% met = erase(met,'[m]');
-% met = erase(met,'[e]');
-% 
-% 
-% pos=strmatch(met,metacyc_trunca2(:,1),'exact');  
-% pos1=strmatch(met,metanetxChem(:,2),'exact');
-% 
-% if sum(pos) ~=0
-% keggMet = metacyc_trunca2{pos(1),2};
-% fields = splitString(keggMet, '\;');
-% legg=fields{1};
-% leggfields = splitString(legg, '\_');
-% model.metIDs{n,1}=leggfields{1};
-% elseif sum(pos1) ~=0
-% poos=find(contains(metanetxChem(pos1,1),'kegg'))
-%     if sum(pos1) > 1 && sum(poos)~=0
-%    % here 
-%    keggMet1 = metanetxChem{pos1(poos),1};
-%    keggMet1 = erase(keggMet1,'kegg:')
-% model.metIDs{n,1}=keggMet1;
-%     else
-% keggMet1 = metanetxChem{pos1(1),1};
-% model.metIDs{n,1}=keggMet1;
-%     end
-% else
-%     model.metIDs{n,1}='N/A';
-%     leftovers=[leftovers,model.mets(n)];
-% 
-% end
-%     else 
-% model.metIDs{n,1}='N/A';
-%     leftovers=[leftovers,model.mets(n)];
-% 
-% end
-% end 
-% 
-% 
-% 
-% % Extract just the METACYC compound names
-% metaMets = {};
-% x = 0;
-% for n = 1:length(metanetxChem)
-%     if strmatch('metacyc', metanetxChem{n,1})
-%         x = x + 1;
-%         metaMets(x,:) = metanetxChem(n,:);
-%     end
-% end
+% %2
+% pos=strmatch('Bacteroid_MNXM231[e]',constrainedNodule.mets,'exact');
+%   constrainedNodule.metFormulas{pos,1}='C6H13NO2';
+% constrainedNodule.metCharges(pos,1)=0;
+% %3
+% pos=strmatch('Bacteroid_MNXM242[e]',constrainedNodule.mets,'exact');
+%   constrainedNodule.metFormulas{pos,1}='C5H10O5';
+% constrainedNodule.metCharges(pos,1)=0;
+% %4
+% pos=strmatch('Bacteroid_MNXM2[e]',constrainedNodule.mets,'exact');
+%   constrainedNodule.metFormulas{pos,1}='H2O';
+% constrainedNodule.metCharges(pos,1)=0;
+% %5
+% pos=strmatch('Bacteroid_MNXM323[e]',constrainedNodule.mets,'exact');
+%   constrainedNodule.metFormulas{pos,1}='HO3S2';
+% constrainedNodule.metCharges(pos,1)=-1;
+% %6 
+% pos=strmatch('Bacteroid_MNXM370[e]',constrainedNodule.mets,'exact');
+%   constrainedNodule.metFormulas{pos,1}='C6H14NO8P';
+% constrainedNodule.metCharges(pos,1)=0;
+% %7 mnxm390
+% pos=strmatch('Bacteroid_MNXM390[e]',constrainedNodule.mets,'exact');
+%   constrainedNodule.metFormulas{pos,1}='C6H12O6';
+% constrainedNodule.metCharges(pos,1)=0;
+% %8 mnxm42
+% pos=strmatch('Bacteroid_MNXM42[e]',constrainedNodule.mets,'exact');
+%   constrainedNodule.metFormulas{pos,1}='C4H7NO4';
+% constrainedNodule.metCharges(pos,1)=0;
+% %9 MNXM722779
+% pos=strmatch('Bacteroid_MNXM722779[e]',constrainedNodule.mets,'exact');
+%   constrainedNodule.metFormulas{pos,1}='C7H9O7';
+% constrainedNodule.metCharges(pos,1)=0;
+% %10 cpdFe4S4
+% %11 hcit
+% % pos=strmatch('Bacteroid_hcit[c]',constrainedNodule.mets,'exact');
+% %   constrainedNodule.metFormulas{pos,1}='C7H7O7';
+% % constrainedNodule.metCharges(pos,1)=-3;
+% %12 mobd
+% % pos=strmatch('Bacteroid_mobd[c]',constrainedNodule.mets,'exact');
+% %   constrainedNodule.metFormulas{pos,1}='H2MoO4';
+% % constrainedNodule.metCharges(pos,1)=0;
+% %13 symCoF
+% %14 photon
+% %15 MNXM182
+% pos=strmatch('Nodule_MNXM182[c]',constrainedNodule.mets,'exact');
+%   constrainedNodule.metFormulas{pos,1}='C6H12O6';
+% constrainedNodule.metCharges(pos,1)=0;
+% %16 _MNXM231
+% pos=strmatch('Nodule_MNXM231[c]',constrainedNodule.mets,'exact');
+%   constrainedNodule.metFormulas{pos,1}='C6H13NO2';
+% constrainedNodule.metCharges(pos,1)=0;
+% %17 MNXM242
+% pos=strmatch('Nodule_MNXM242[c]',constrainedNodule.mets,'exact');
+%   constrainedNodule.metFormulas{pos,1}='C5H10O5';
+% constrainedNodule.metCharges(pos,1)=0;
+% %18-21 MNXM2
+% pos=strmatch('Nodule_MNXM2[c]',constrainedNodule.mets,'exact');
+%   constrainedNodule.metFormulas{pos,1}='H2O';
+% constrainedNodule.metCharges(pos,1)=0;
+% pos=strmatch('Nodule_MNXM2[m]',constrainedNodule.mets,'exact');
+%   constrainedNodule.metFormulas{pos,1}='H2O';
+% constrainedNodule.metCharges(pos,1)=0;
+% pos=strmatch('Nodule_MNXM2[p]',constrainedNodule.mets,'exact');
+%   constrainedNodule.metFormulas{pos,1}='H2O';
+% constrainedNodule.metCharges(pos,1)=0;
+% pos=strmatch('Nodule_MNXM2[x]',constrainedNodule.mets,'exact');
+%   constrainedNodule.metFormulas{pos,1}='H2O';
+% constrainedNodule.metCharges(pos,1)=0;
+% % 22 MNXM323
+% pos=strmatch('Nodule_MNXM323[c]',constrainedNodule.mets,'exact');
+%   constrainedNodule.metFormulas{pos,1}='HO3S2';
+% constrainedNodule.metCharges(pos,1)=-1;
+% %23 MNXM370
+% pos=strmatch('Nodule_MNXM370[c]',constrainedNodule.mets,'exact');
+%   constrainedNodule.metFormulas{pos,1}='C6H14NO8P';
+% constrainedNodule.metCharges(pos,1)=0;
+% %24 MNXM390
+% pos=strmatch('Nodule_MNXM390[c]',constrainedNodule.mets,'exact');
+%   constrainedNodule.metFormulas{pos,1}='C6H12O6';
+% constrainedNodule.metCharges(n,1)=0;
+% %25-27 MNXM42
+% pos=strmatch('Nodule_MNXM42[c]',constrainedNodule.mets,'exact');
+%   constrainedNodule.metFormulas{pos,1}='C4H7NO4';
+% constrainedNodule.metCharges(pos,1)=0;
+% pos=strmatch('Nodule_MNXM42[m]',constrainedNodule.mets,'exact');
+%   constrainedNodule.metFormulas{pos,1}='C4H7NO4';
+% constrainedNodule.metCharges(pos,1)=0;
+% pos=strmatch('Nodule_MNXM42[p]',constrainedNodule.mets,'exact');
+%   constrainedNodule.metFormulas{pos,1}='C4H7NO4';
+% constrainedNodule.metCharges(pos,1)=0;
+% %28 MNXM722779
+% pos=strmatch('Nodule_MNXM722779[c]',constrainedNodule.mets,'exact');
+%   constrainedNodule.metFormulas{pos,1}='C7H9O7';
+% constrainedNodule.metCharges(pos,1)=0;
+% %29 MNXM746
+% %33 phb C12H20O6
+% pos=strmatch('Bacteroid_phb[c]',constrainedNodule.mets,'exact');
+%   constrainedNodule.metFormulas{pos,1}='C4H6O2';
+% constrainedNodule.metCharges(pos,1)=0;
+% % %% generating multiple database IDs
 % % 
-% % % Import METANETX compound database
-% % metanetxChem = table2cell(readtable('chem_xref.txt', 'Delimiter', '\t','ReadVariableNames', false));
+% % metanetx=model.mets(find(contains(model.mets,'MNXM')));
+% % 
+% % Other=setdiff(model.mets,metanetx);
+% % load('mappedCompounds.mat')
+% % model.metIDs={};leftovers=[];
+% % for n=1:length(model.mets)
+% %  n   
+% % boo=contains(model.mets{n},'MNXM')
+% %     if boo~=0
+% % met = model.mets{n};
+% % met = erase(met,'Leave_');
+% % met = erase(met,'Root_');
+% % met = erase(met,'Bacteroid_');
+% % met = erase(met,'Nodule_');
+% % met = erase(met,'[c]');
+% % met = erase(met,'[p]');
+% % met = erase(met,'[x]');
+% % met = erase(met,'[m]');
+% % met = erase(met,'[e]');
 % % 
 % % 
+% % pos=strmatch(met,metacyc_trunca2(:,1),'exact');  
+% % pos1=strmatch(met,metanetxChem(:,2),'exact');
 % % 
-% % %% Change metabolite names
-% % 
-% % % Extract just the BIGG compound names
-% % seedMets = {};
-% % x = 0;
-% % for n = 1:length(metanetxChem)
-% %     if strmatch('bigg', metanetxChem{n,1})
-% %         x = x + 1;
-% %         seedMets(x,:) = metanetxChem(n,:);
+% % if sum(pos) ~=0
+% % keggMet = metacyc_trunca2{pos(1),2};
+% % fields = splitString(keggMet, '\;');
+% % legg=fields{1};
+% % leggfields = splitString(legg, '\_');
+% % model.metIDs{n,1}=leggfields{1};
+% % elseif sum(pos1) ~=0
+% % poos=find(contains(metanetxChem(pos1,1),'kegg'))
+% %     if sum(pos1) > 1 && sum(poos)~=0
+% %    % here 
+% %    keggMet1 = metanetxChem{pos1(poos),1};
+% %    keggMet1 = erase(keggMet1,'kegg:')
+% % model.metIDs{n,1}=keggMet1;
+% %     else
+% % keggMet1 = metanetxChem{pos1(1),1};
+% % model.metIDs{n,1}=keggMet1;
 % %     end
+% % else
+% %     model.metIDs{n,1}='N/A';
+% %     leftovers=[leftovers,model.mets(n)];
+% % 
 % % end
+% %     else 
+% % model.metIDs{n,1}='N/A';
+% %     leftovers=[leftovers,model.mets(n)];
+% % 
+% % end
+% % end 
+% % 
 % % 
 % % 
 % % % Extract just the METACYC compound names
-% % mnxmMets = {};
+% % metaMets = {};
 % % x = 0;
 % % for n = 1:length(metanetxChem)
-% %     if strmatch('MNXM', metanetxChem{n,1})
+% %     if strmatch('metacyc', metanetxChem{n,1})
 % %         x = x + 1;
-% %         mnxmMets(x,:) = metanetxChem(n,:);
+% %         metaMets(x,:) = metanetxChem(n,:);
 % %     end
 % % end
-% % 
-% % % Extract model compound names
-% % cpdNames = cell(length(model.mets), 3);
-% % for n = 1:length(model.mets)
-% %     if strmatch('Leave_', model.mets{n})
-% %         cpdNames{n,1} = 'Leave_';
-% %         cpdNames{n,2} = strrep(model.mets{n}, 'Leave_', '');
-% %     elseif strmatch('Root_', model.mets{n})
-% %         cpdNames{n,1} = 'Root_';
-% %         cpdNames{n,2} = strrep(model.mets{n}, 'Root_', '');
-% %     elseif strmatch('Nodule_', model.mets{n})
-% %         cpdNames{n,1} = 'Nodule_';
-% %         cpdNames{n,2} = strrep(model.mets{n}, 'Nodule_', '');
-% %     elseif strmatch('NoduleI_', model.mets{n})
-% %         cpdNames{n,1} = 'NoduleI_';
-% %         cpdNames{n,2} = strrep(model.mets{n}, 'NoduleI_', '');
-% %     elseif strmatch('NoduleIId_', model.mets{n})
-% %         cpdNames{n,1} = 'NoduleIId_';
-% %         cpdNames{n,2} = strrep(model.mets{n}, 'NoduleIId_', '');
-% %     elseif strmatch('NoduleIIp_', model.mets{n})
-% %         cpdNames{n,1} = 'NoduleIIp_';
-% %         cpdNames{n,2} = strrep(model.mets{n}, 'NoduleIIp_', '');
-% %     elseif strmatch('NoduleIZ_', model.mets{n})
-% %         cpdNames{n,1} = 'NoduleIZ_';
-% %         cpdNames{n,2} = strrep(model.mets{n}, 'NoduleIZ_', '');
-% %     elseif strmatch('NoduleIII_', model.mets{n})
-% %         cpdNames{n,1} = 'NoduleIII_';
-% %         cpdNames{n,2} = strrep(model.mets{n}, 'NoduleIII_', '');
-% %     elseif strmatch('BacteroidIId_', model.mets{n})
-% %         cpdNames{n,1} = 'BacteroidIId_';
-% %         cpdNames{n,2} = strrep(model.mets{n}, 'BacteroidIId_', '');
-% %     elseif strmatch('BacteroidIIp_', model.mets{n})
-% %         cpdNames{n,1} = 'BacteroidIIp_';
-% %         cpdNames{n,2} = strrep(model.mets{n}, 'BacteroidIIp_', '');
-% %     elseif strmatch('BacteroidIZ_', model.mets{n})
-% %         cpdNames{n,1} = 'BacteroidIZ_';
-% %         cpdNames{n,2} = strrep(model.mets{n}, 'BacteroidIZ_', '');
-% %     elseif strmatch('Bacteroid_', model.mets{n})
-% %         cpdNames{n,1} = 'Bacteroid_';
-% %         cpdNames{n,2} = strrep(model.mets{n}, 'Bacteroid_', '');
-% %     else
-% %         cpdNames{n,2} = model.mets{n};
-% %     end
-% %     splitString = strsplit(cpdNames{n,2}, '[');
-% %     if length(splitString) == 2
-% %         cpdNames{n,2} = splitString{1};
-% %         cpdNames{n,3} = splitString{2};
-% %     end
-% % end
-% % 
-% % % Change compound names, where possible
-% % for n = 1:length(model.mets)
-% %     if strmatch('Bacteroid', cpdNames{n,1})
-% %         cpd = ['bigg:' cpdNames{n,2}];
-% %         pos = strmatch(cpd, seedMets(:,1), 'exact');
-% %         if ~isempty(pos)
-% %             cpdNames{n,2} = seedMets{pos,2};
-% %         end
-% %     else
-% %         cpd = ['metacyc:' cpdNames{n,2}];
-% %         pos = strmatch(cpd, metaMets(:,1), 'exact');
-% %         if ~isempty(pos)
-% %             cpdNames{n,2} = metaMets{pos,2};
-% %         end
-% %     end
-% % end
-% % for n = 1:length(model.mets)
-% %     cpd = strcat(cpdNames{n,1}, cpdNames{n,2});
-% %     if ~isempty(cpdNames{n,3})
-% %         cpdTemp = strcat(cpd, '_', reactionNames{n,3});
-% %         if strmatch(cpdTemp, model.mets, 'exact')
-% %             model.mets{n,1} = strcat(cpd, 'b', '[', cpdNames{n,3});
-% %         else
-% %             model.mets{n,1} = strcat(cpd, '[', cpdNames{n,3});
-% %         end        
-% %     else
-% %         if strmatch(cpdTemp, model.mets, 'exact')
-% %             model.mets{n,1} = strcat(cpd, 'b');
-% %         else
-% %             model.mets{n,1} = cpd;
-% %         end        
-% %     end
-% % end
+% % % 
+% % % % Import METANETX compound database
+% % % metanetxChem = table2cell(readtable('chem_xref.txt', 'Delimiter', '\t','ReadVariableNames', false));
+% % % 
+% % % 
+% % % 
+% % % %% Change metabolite names
+% % % 
+% % % % Extract just the BIGG compound names
+% % % seedMets = {};
+% % % x = 0;
+% % % for n = 1:length(metanetxChem)
+% % %     if strmatch('bigg', metanetxChem{n,1})
+% % %         x = x + 1;
+% % %         seedMets(x,:) = metanetxChem(n,:);
+% % %     end
+% % % end
+% % % 
+% % % 
+% % % % Extract just the METACYC compound names
+% % % mnxmMets = {};
+% % % x = 0;
+% % % for n = 1:length(metanetxChem)
+% % %     if strmatch('MNXM', metanetxChem{n,1})
+% % %         x = x + 1;
+% % %         mnxmMets(x,:) = metanetxChem(n,:);
+% % %     end
+% % % end
+% % % 
+% % % % Extract model compound names
+% % % cpdNames = cell(length(model.mets), 3);
+% % % for n = 1:length(model.mets)
+% % %     if strmatch('Leave_', model.mets{n})
+% % %         cpdNames{n,1} = 'Leave_';
+% % %         cpdNames{n,2} = strrep(model.mets{n}, 'Leave_', '');
+% % %     elseif strmatch('Root_', model.mets{n})
+% % %         cpdNames{n,1} = 'Root_';
+% % %         cpdNames{n,2} = strrep(model.mets{n}, 'Root_', '');
+% % %     elseif strmatch('Nodule_', model.mets{n})
+% % %         cpdNames{n,1} = 'Nodule_';
+% % %         cpdNames{n,2} = strrep(model.mets{n}, 'Nodule_', '');
+% % %     elseif strmatch('NoduleI_', model.mets{n})
+% % %         cpdNames{n,1} = 'NoduleI_';
+% % %         cpdNames{n,2} = strrep(model.mets{n}, 'NoduleI_', '');
+% % %     elseif strmatch('NoduleIId_', model.mets{n})
+% % %         cpdNames{n,1} = 'NoduleIId_';
+% % %         cpdNames{n,2} = strrep(model.mets{n}, 'NoduleIId_', '');
+% % %     elseif strmatch('NoduleIIp_', model.mets{n})
+% % %         cpdNames{n,1} = 'NoduleIIp_';
+% % %         cpdNames{n,2} = strrep(model.mets{n}, 'NoduleIIp_', '');
+% % %     elseif strmatch('NoduleIZ_', model.mets{n})
+% % %         cpdNames{n,1} = 'NoduleIZ_';
+% % %         cpdNames{n,2} = strrep(model.mets{n}, 'NoduleIZ_', '');
+% % %     elseif strmatch('NoduleIII_', model.mets{n})
+% % %         cpdNames{n,1} = 'NoduleIII_';
+% % %         cpdNames{n,2} = strrep(model.mets{n}, 'NoduleIII_', '');
+% % %     elseif strmatch('BacteroidIId_', model.mets{n})
+% % %         cpdNames{n,1} = 'BacteroidIId_';
+% % %         cpdNames{n,2} = strrep(model.mets{n}, 'BacteroidIId_', '');
+% % %     elseif strmatch('BacteroidIIp_', model.mets{n})
+% % %         cpdNames{n,1} = 'BacteroidIIp_';
+% % %         cpdNames{n,2} = strrep(model.mets{n}, 'BacteroidIIp_', '');
+% % %     elseif strmatch('BacteroidIZ_', model.mets{n})
+% % %         cpdNames{n,1} = 'BacteroidIZ_';
+% % %         cpdNames{n,2} = strrep(model.mets{n}, 'BacteroidIZ_', '');
+% % %     elseif strmatch('Bacteroid_', model.mets{n})
+% % %         cpdNames{n,1} = 'Bacteroid_';
+% % %         cpdNames{n,2} = strrep(model.mets{n}, 'Bacteroid_', '');
+% % %     else
+% % %         cpdNames{n,2} = model.mets{n};
+% % %     end
+% % %     splitString = strsplit(cpdNames{n,2}, '[');
+% % %     if length(splitString) == 2
+% % %         cpdNames{n,2} = splitString{1};
+% % %         cpdNames{n,3} = splitString{2};
+% % %     end
+% % % end
+% % % 
+% % % % Change compound names, where possible
+% % % for n = 1:length(model.mets)
+% % %     if strmatch('Bacteroid', cpdNames{n,1})
+% % %         cpd = ['bigg:' cpdNames{n,2}];
+% % %         pos = strmatch(cpd, seedMets(:,1), 'exact');
+% % %         if ~isempty(pos)
+% % %             cpdNames{n,2} = seedMets{pos,2};
+% % %         end
+% % %     else
+% % %         cpd = ['metacyc:' cpdNames{n,2}];
+% % %         pos = strmatch(cpd, metaMets(:,1), 'exact');
+% % %         if ~isempty(pos)
+% % %             cpdNames{n,2} = metaMets{pos,2};
+% % %         end
+% % %     end
+% % % end
+% % % for n = 1:length(model.mets)
+% % %     cpd = strcat(cpdNames{n,1}, cpdNames{n,2});
+% % %     if ~isempty(cpdNames{n,3})
+% % %         cpdTemp = strcat(cpd, '_', reactionNames{n,3});
+% % %         if strmatch(cpdTemp, model.mets, 'exact')
+% % %             model.mets{n,1} = strcat(cpd, 'b', '[', cpdNames{n,3});
+% % %         else
+% % %             model.mets{n,1} = strcat(cpd, '[', cpdNames{n,3});
+% % %         end        
+% % %     else
+% % %         if strmatch(cpdTemp, model.mets, 'exact')
+% % %             model.mets{n,1} = strcat(cpd, 'b');
+% % %         else
+% % %             model.mets{n,1} = cpd;
+% % %         end        
+% % %     end
+% % % end
