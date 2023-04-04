@@ -3,7 +3,7 @@ function VaryingSR
 % 0.26) Default value being 0.17 24th Oct 22 
 clear 
 close ALL
-model=readCbModel('GeorgeUreideMay22.mat')
+model=readCbModel('model_with_databases_subs.mat')
 
  PlantBiomassReactions = find(ismember(model.rxns,{'R_PlantBiomass'}));
  BiomassRootPos = find(ismember(model.mets,'Root_BiomassRoot[c]'));
