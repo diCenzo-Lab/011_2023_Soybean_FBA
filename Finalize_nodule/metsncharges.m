@@ -3,7 +3,7 @@ changeCobraSolver ('ibm_cplex');
 
 soy=readCbModel('soybeangeorge.mat');
 brady=readCbModel('USDA110_model.mat');
-model=readCbModel('GeorgeUreideMay22.mat')
+model=readCbModel('finalNodulatedPlant.mat')
 % % Import METANETX compound database
 metanetxForm = table2cell(readtable('chem_prop.txt', 'Delimiter', '\t','ReadVariableNames', false));
 metanetxChem = table2cell(readtable('chem_xref.txt', 'Delimiter', '\t','ReadVariableNames', false));
