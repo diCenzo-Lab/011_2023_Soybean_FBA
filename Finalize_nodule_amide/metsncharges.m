@@ -3,7 +3,7 @@ changeCobraSolver ('ibm_cplex');
 
 soy=readCbModel('soybeangeorge.mat');
 brady=readCbModel('USDA110_model.mat');
-model=readCbModel('GeorgeUreideMay22.mat')
+model=readCbModel('NEWcombinedModel.mat')
 % % Import METANETX compound database
 metanetxForm = table2cell(readtable('chem_prop.txt', 'Delimiter', '\t','ReadVariableNames', false));
 metanetxChem = table2cell(readtable('chem_xref.txt', 'Delimiter', '\t','ReadVariableNames', false));
@@ -392,7 +392,7 @@ metsleft=transpose(metsleft)
 
 constrainedNodule.metFormulas=strrep(constrainedNodule.metFormulas,'*','');
 model=constrainedNodule;
-save('model_with_formulas','model')
+save('combined_model_with_formulas','model')
 
 % 
 % 
