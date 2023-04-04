@@ -6,7 +6,7 @@ close ALL
 changeCobraSolver ('glpk');
 
 %model=readCbModel('GeorgeUreideMay22.mat')
-model=readCbModel('mass_charge_balanced_model.mat')
+model=readCbModel('model_with_databases_subs.mat')
 
  PlantBiomassReactions = find(ismember(model.rxns,{'R_PlantBiomass'}));
  BiomassRootPos = find(ismember(model.mets,'Root_BiomassRoot[c]'));
