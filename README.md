@@ -1,4 +1,5 @@
-# SoybeanFBA
+# A genome-scale metabolic reconstruction of soybean and *Bradyrhizobium diazoefficiens* reveals the cost–benefit of nitrogen fixation
+
 Analysis folder contains all code used to generate figures in Holland et al. 2023
 Remaining directories are code required to construct soybean FBA model as follows:
 1. Produce_Plant
