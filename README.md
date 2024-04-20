@@ -1,6 +1,6 @@
 # A genome-scale metabolic reconstruction of soybean and *Bradyrhizobium diazoefficiens* reveals the cost–benefit of nitrogen fixation
 
-Holland BL, Matthew ML, Bota P, Sweetlove LJ, Long SP, diCenzo GC. (2023) A genome-scale metabolic reconstruction of soybean and *Bradyrhizobium diazoefficiens* reveals the cost-benefit of nitrogen fixation. New Phytologist. doi: 10.1111/nph.19203.
+Holland BL, Matthew ML, Bota P, Sweetlove LJ, Long SP, diCenzo GC. (2023) **A genome-scale metabolic reconstruction of soybean and *Bradyrhizobium diazoefficiens* reveals the cost-benefit of nitrogen fixation**. *New Phytologist*. 240(2): 744-756.
 
 This repository contains a set of scripts used to perform the model reconstruction and analyses reported in the above article, and as described below. If you use adaptations of any of these scripts or pipelines as part of your work, please cite our article.
 
